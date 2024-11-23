@@ -13,29 +13,30 @@ const Shoppingcard = () => {
   const product = items[id];
 
   useEffect(() => {
-      if (!cart || Object.keys(cart.items || {}).length === 0) {
-          setCart(savedCart);
-      }
+    if (!cart || Object.keys(cart.items || {}).length === 0) {
+      setCart(savedCart);
+    }
   }, [cart, savedCart, setCart]);
 
   if (!id || !product) {
-      return <p>Product not found in cart.</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <p className="text-gray-700 text-lg">Product not found in cart.</p>
+      </div>
+    );
   }
 
-  // console.log(getCartFromLocalStorage());
-
-
   const publickey = 'pk_test_296f47c5e8e7a5b71336f33dd7c61d59b70083cb';
-  const UserEmail = "ugwuvalentine917@gmail.com"
+  const UserEmail = 'ugwuvalentine917@gmail.com';
   const amount = product ? product.price * 100 : 0;
 
   const componentProps = {
-    email: UserEmail, // customer email
-    amount: amount, // amount in the smallest currency unit
+    email: UserEmail,
+    amount: amount,
     metadata: {
       description: product ? product.description : 'Payment for items in cart',
     },
-    publicKey: publickey, // public key to use
+    publicKey: publickey,
     text: 'Pay Now',
     onSuccess: () => {
       alert('Thanks for doing business with us! Come back soon!!');
@@ -43,38 +44,35 @@ const Shoppingcard = () => {
     onClose: () => alert(`Wait! Do not leave ${product.name} behind!`),
   };
 
-  // console.log('Cart:', cart);
-  // console.log('Product ID:', id);
-  // console.log('Product:', product);
-
   return (
     <div>
       <Navbar />
-      <div className="bg-blue-500 min-h-screen">
-        <section className="text-white py-20 text-center">
-          <h1 className="text-4xl font-bold ">Your Cart</h1>
+      <div className="bg-gray-100 min-h-screen">
+        <section className="py-10 text-center">
+          <h1 className="text-3xl font-bold text-gray-800">Your Cart</h1>
           {product ? (
-            <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+            <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg mt-6">
               <img
-                className="w-75 h-23 object-cover items-center"
+                className="w-75 h-48 object-cover"
                 src={product.image}
                 alt={product.name}
               />
               <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{product.name}</div>
-                <p className="text-gray-700 text-base">{product.description}</p>
+                <h2 className="font-bold text-2xl text-gray-800">{product.name}</h2>
+                <p className="text-gray-600 mt-2">{product.description}</p>
               </div>
               <div className="px-6 py-4">
-                <span className="font-bold text-xl text-gray-900">
-                  ${product.price}
-                </span>
+                <span className="font-bold text-xl text-gray-900">${product.price}</span>
               </div>
-              <div >
-                <PaystackButton {...componentProps} className="p-3 bg-blue-500 text-black rounded-lg shadow-md " />
+              <div className="px-6 py-4">
+                <PaystackButton
+                  {...componentProps}
+                  className="p-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700"
+                />
               </div>
             </div>
           ) : (
-            <p className="text-lg mb-6">You have no items in your cart</p>
+            <p className="text-lg mt-6 text-gray-600">You have no items in your cart</p>
           )}
         </section>
       </div>
