@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch Data/Productdetail.json --port 9000"
+    "server": "json-server --watch public/Data/Productdetail.json --port 9000"
   },
   "dependencies": {
     "axios": "^1.7.7",
