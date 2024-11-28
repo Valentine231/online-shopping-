@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {CartContext} from './Cartcontext';
+import {Shopping} from './Cartcontext';
 import Navbar from './Navbar';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import { Navigate,  useNavigate } from 'react-router-dom';
-import Shoppingcard from './Shoppingcard';
-import { saveCartToLocalStorage } from './utilisstorage';
+
+
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
-    const {cart, setCart} = useContext(CartContext);
+    const { handleAddToCart } = useContext(Shopping);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,13 +41,7 @@ const Shop = () => {
         fetchproduct()
     },[currentPage])
 
-    useEffect(() => {
-        // Load cart from localStorage when the component mounts
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
-            setCart(JSON.parse(savedCart));
-        }
-    }, [setCart]);
+ 
 
    
     const currentProducts = products.slice(
@@ -76,58 +70,18 @@ const Shop = () => {
 };
 
 
-const handleAddToCart = (product) => {
-    setCart((prevCart) => {
-        const updatedCart = {
-            ...prevCart,
-            items: {
-                ...prevCart.items,
-                [product.id]: {
-                    ...product,
-                    quantity: (prevCart.items[product.id]?.quantity || 0) + 1,
-                },
-            },
-        };
-        saveCartToLocalStorage(updatedCart);
-        return updatedCart;
-    });
-    navigate(`/Cart/${product.id}`);
-};
+const handleclick = (product) => {
+
+    const updatedCart = handleAddToCart(product);
+ 
+     navigate(`/Cart/${product.id}`, { state: { cart: updatedCart } })
+     
+   };
+ 
 
 
 
 
-const handleQuantityChange = (productId, change) => {
-    setCart((prevCart) => {
-      // Check if the product exists in the cart
-      const product = prevCart.items[productId];
-      if (!product) return prevCart;
-  
-      // Calculate the new quantity
-      const newQuantity = (product.quantity || 1) + change;
-  
-      // Ensure quantity is at least 1
-      if (newQuantity < 1) return prevCart;
-  
-      // Update the cart with the new quantity
-      const updatedCart = {
-        ...prevCart,
-        items: {
-          ...prevCart.items,
-          [productId]: {
-            ...product,
-            quantity: newQuantity,
-          },
-        },
-      };
-  
-      // Save the updated cart to localStorage
-      saveCartToLocalStorage(updatedCart);
-  
-      return updatedCart;
-    });
-  };
-  
 
     
     return(
@@ -145,9 +99,7 @@ const handleQuantityChange = (productId, change) => {
                                     <ProductCard
                                     product={product}
                                     key={product.id}
-                                    onadd={handleAddToCart}
-                                    addQuantity={handleQuantityChange}
-                                    quantities={quantities}
+                                    onadd={()=>handleclick(product)}
                                     />
                                 ))
                             ) : (

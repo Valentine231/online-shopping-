@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductCard = ({product,onadd,addQuantity,quantities}) => {
+const ProductCard = ({product,onadd}) => {
   const {name,image,description,price} = product
   return (
     
@@ -17,23 +17,7 @@ const ProductCard = ({product,onadd,addQuantity,quantities}) => {
       <button onClick={()=>onadd(product)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Add to Cart
       </button>
-      {/* <div className="flex items-center mt-2">
-                                        <button
-                                            onClick={() => addQuantity(product.id, -1)}
-                                            className="bg-gray-300 px-2 py-1 rounded-l"
-                                        >
-                                            -
-                                        </button>
-                                        <span className="px-4 py-1 bg-gray-200 text-center">
-                                            {quantities[product.id] || 1}
-                                        </span>
-                                        <button
-                                            onClick={() => addQuantity(product.id, 1)}
-                                            className="bg-gray-300 px-2 py-1 rounded-r"
-                                        >
-                                            +
-                                        </button>
-                                        </div> */}
+
                                    
   </div>
   </div>

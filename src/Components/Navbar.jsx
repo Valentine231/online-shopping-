@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from './Logo';
-import { CartContext } from './Cartcontext';
+
 
 const Navbar = () => {
-  const { cart } = useContext(CartContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const firstItemId = Object.keys(cart.items || {})[0];
+ 
 
   return (
     <nav className="bg-gray-800 p-4">
@@ -63,7 +62,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to={firstItemId ? `/Cart/${firstItemId}` : "/Cart"}
+              to='/Cart/:id' 
               className={({ isActive }) =>
                 isActive
                   ? "text-white border-b-2 border-blue-500"

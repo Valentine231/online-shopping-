@@ -8,7 +8,7 @@ import Shop from './Components/Shop.jsx'
 import Errorpage from './Components/Errorpage.jsx'
 import Shoppingcard from './Components/Shoppingcard.jsx'
 import ProductCard from './Components/ProductCard.jsx'
-import Cartprovider from './Components/Cartcontext.jsx'
+import { ShoppingProvider } from './Components/Cartcontext.jsx'
 
 
 
@@ -43,9 +43,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Cartprovider>
+    <ShoppingProvider>
       <RouterProvider router={router} />
-    </Cartprovider>
+    </ShoppingProvider>
   </StrictMode>,
 )
 
