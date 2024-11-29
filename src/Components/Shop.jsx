@@ -17,7 +17,7 @@ const Shop = () => {
     const [itemsPerPage] = useState(9);
     const [totalItems, setTotalItems] = useState(0);
     // const [quantities, setQuantities] = useState({});
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
     const navigate = useNavigate()
 
 
