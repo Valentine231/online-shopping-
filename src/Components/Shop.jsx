@@ -16,8 +16,8 @@ const Shop = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(9);
     const [totalItems, setTotalItems] = useState(0);
-    const [quantities, setQuantities] = useState({});
-    const BASE_URL = 'http://localhost:9000';
+    // const [quantities, setQuantities] = useState({});
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
     const navigate = useNavigate()
 
 
