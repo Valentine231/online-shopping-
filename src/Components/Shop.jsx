@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import { Navigate,  useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 
 
@@ -111,7 +112,7 @@ const handleclick = (product) => {
 
 
                         {totalPages > 1 && (
-                    <div className="pagination flex justify-center mt-6">
+                    <div className="pagination flex justify-center mt-8">
                         {Array.from({ length: totalPages }, (_, index) => (
                             <button
                                 key={index + 1}
@@ -129,6 +130,8 @@ const handleclick = (product) => {
                         )}
                      </>
                 )}
+
+                <Footer />
 
             </div>
     );
