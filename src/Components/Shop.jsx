@@ -29,8 +29,8 @@ const Shop = () => {
             setLoading(true)
             try{
             const response = await axios.get(`${BASE_URL}/products?page=${currentPage}&limit=${itemsPerPage}`)
-            setProducts(response.data.products)
-            setTotalItems(response.data.totalItems);
+            setProducts(response.data || [])
+            setTotalItems(response.data.totalItems || 0);
             }catch{
                 setError(HandleError(error.response))
             }finally{
