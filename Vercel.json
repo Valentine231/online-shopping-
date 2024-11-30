@@ -1,9 +1,11 @@
+
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/Data/Productdetail.json"
-      }
-    ]
-  }
+  "rewrites": [
+    {
+      "source": "/products",
+      "destination": "/api/products"
+    }
+  ]
+}
+
   
