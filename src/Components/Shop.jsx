@@ -28,10 +28,11 @@ const Shop = () => {
         const fetchproduct = async()=>{
             setLoading(true)
             try{
+                console.log('Fetching from:', `${BASE_URL}/products?page=${currentPage}&limit=${itemsPerPage}`);
             const response = await axios.get(`${BASE_URL}/products?page=${currentPage}&limit=${itemsPerPage}`)
             setProducts(response.data || [])
             setTotalItems(response.data.totalItems || 0);
-            }catch{
+            }catch(error) {
                 setError(HandleError(error.response))
             }finally{
                 setLoading(false)
