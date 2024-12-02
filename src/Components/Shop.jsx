@@ -17,7 +17,7 @@ const Shop = () => {
     const [itemsPerPage] = useState(9);
     const [totalItems, setTotalItems] = useState(0);
     // const [quantities, setQuantities] = useState({});
-    // const BASE_URL = import.meta.env.VITE_BASE_URL;
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
     const navigate = useNavigate()
 
 
@@ -28,8 +28,8 @@ const Shop = () => {
         const fetchproduct = async()=>{
             setLoading(true)
             try{
-                // console.log('Fetching from:', `${BASE_URL}/products?page=${currentPage}&limit=${itemsPerPage}`);
-            const response = await axios.get(`/API/products?page=${currentPage}&limit=${itemsPerPage}`)
+                console.log('Fetching from:', `${BASE_URL}/products?page=${currentPage}&limit=${itemsPerPage}`);
+            const response = await axios.get(`${BASE_URL}/products?page=${currentPage}&limit=${itemsPerPage}`)
             setProducts(response.data || [])
             setTotalItems(response.data.totalItems || 0);
             }catch(error) {
