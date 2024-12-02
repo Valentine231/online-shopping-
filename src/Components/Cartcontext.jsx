@@ -33,39 +33,37 @@ export const ShoppingProvider = ({ children }) => {
     };
 
 
-const handleQuantityChange = (productId, change) => {
+  
+  const addQuantity = (productId, change) => {
     setCart((prevCart) => {
-      // Check if the product exists in the cart
-      const product = prevCart.items[productId];
+      const product = prevCart[productId];
       if (!product) return prevCart;
-  
-      // Calculate the new quantity
+
       const newQuantity = (product.quantity || 1) + change;
-  
-      // Ensure quantity is at least 1
-      if (newQuantity < 1) return prevCart;
-  
-      // Update the cart with the new quantity
+      if (newQuantity < 1) {
+        const { [productId]: _, ...remainingCart } = prevCart;
+        return remainingCart;
+      }
+
       const updatedCart = {
         ...prevCart,
-        items: {
-          ...prevCart.items,
-          [productId]: {
-            ...product,
-            quantity: newQuantity,
-          },
+        [productId]: {
+          ...product,
+          quantity: newQuantity,
         },
       };
-  
-     
-  
+
+      setQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [productId]: newQuantity,
+      }));
+
       return updatedCart;
     });
   };
-  
 
     return (
-        <Shopping.Provider value={{ handleAddToCart,handleQuantityChange,cart }}>
+        <Shopping.Provider value={{ handleAddToCart,addQuantity,cart, quantities }}>
             {children}
         </Shopping.Provider>
     )
